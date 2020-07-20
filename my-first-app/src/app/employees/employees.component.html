@@ -1,0 +1,31 @@
+<button (click)="add()" class="button btn btn-success">Add</button>
+<table class="table">
+  <thead style="background-color: blue; color: white;">
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Gender</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody style="background-color: pink;">
+    <tr  *ngFor="let employee of employees">
+      <th scope="row">{{employee.employee_code}}</th>
+      <td>{{employee.first_name}}</td>
+      <td>{{employee.family_name}}</td>
+      <td>{{employee.gender ==1 ? 'dan ong' : 'dan ba'}}</td>
+      <td style="width:250px;">
+        <button (click)='edit(employee.id)' class="btn btn-warning"> edit</button> &nbsp;
+        <button (click)='delete(employee.id)' class="btn btn-danger" value={{employee.id}}> delete</button>&nbsp;
+        <button (click)='view(employee.id)' ngbAutofocus class="btn btn-info" value={{employee.id}}> detail</button>
+      </td>
+    </tr>
+  </tbody>
+
+</table>
+<!-- <button mat-raised-button (click)="openDialog()">Pick one</button> -->
+<div *ngIf="listView">
+  <div>data</div>
+  <!-- <app-employees-detail></app-employees-detail> -->
+</div>

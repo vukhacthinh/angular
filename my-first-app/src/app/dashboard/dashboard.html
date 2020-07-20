@@ -1,0 +1,27 @@
+<form action="">
+  <table class="table table-bordered table-hover">
+    <thead style="background-color: greenyellow;">
+      <tr>
+        <th>Mon</th>
+        <th>Tue</th>
+        <th>Wed</th>
+        <th>Thu</th>
+        <th>Fri</th>
+        <th>Sat</th>
+        <th>Sun</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let trAr of trArr; let a = index;">
+        <td *ngFor="let tdAr of tdArr; let i = index;">{{a * 7 + i}}////{{days[a * 7 + i].date}}</td>
+      </tr>
+    </tbody>
+    </table>
+    <button class="btn btn-info">
+        Pre
+    </button>
+    <input type="date" ([ngModel])="todayConvert"/>
+    <button class="btn btn-info">
+      Next
+    </button>
+</form>

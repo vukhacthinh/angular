@@ -1,0 +1,89 @@
+<form class="formAddEmployee" [formGroup]="formAddEmployee" (ngSubmit)="onclickFormAddEmployee()">
+  <div class="all-border">
+
+    <table class="table table-bordered table-hover">
+      <tbody>
+        <tr>
+          <td>employee_code: </td>
+          <td><input type="text" formControlName="employee_code" name="employee_code"> </td>
+        </tr>
+        <tr>
+          <td>password: </td>
+          <td><input type="text" formControlName="password" name="password"> </td>
+        </tr>
+        <tr>
+          <td>family_name: </td>
+          <td><input type="text" formControlName="family_name" name="family_name"> </td>
+        </tr>
+        <tr>
+          <td>family_name_kana: </td>
+          <td><input type="text" formControlName="family_name_kana" name="family_name_kana"> </td>
+        </tr>
+        <tr>
+          <td>first_name: </td>
+          <td><input type="text" formControlName="first_name" name="first_name"> </td>
+        </tr>
+        <tr>
+          <td>first_name_kana: </td>
+          <td><input type="text" formControlName="first_name_kana" name="first_name_kana"> </td>
+        </tr>
+        <tr>
+          <td>employeement_status: </td>
+          <td><input type="text" formControlName="employeement_status" name="employeement_status"> </td>
+        </tr>
+        <tr>
+          <td>gender: </td>
+          <td><input type="text" formControlName="gender" name="gender"> </td>
+        </tr>
+        <tr>
+          <td>address: </td>
+          <td><input type="text" formControlName="address" name="address"> </td>
+        </tr>
+        <tr>
+          <td>area_id: </td>
+          <td><input type="text" formControlName="area_id" name="area_id"> </td>
+        </tr>
+        <tr>
+          <td>birthday: </td>
+          <td><input type="text" formControlName="birthday" name="birthday"> </td>
+        </tr>
+        <tr>
+          <td>company_id: </td>
+          <td><input type="text" formControlName="company_id" name="company_id"> </td>
+        </tr>
+        <tr>
+          <td>company_section_id: </td>
+          <td><input type="text" formControlName="company_section_id" name="company_section_id"> </td>
+        </tr>
+        <tr>
+          <td>email: </td>
+          <td><input type="text" formControlName="email" name="email"> </td>
+        </tr>
+        <tr>
+          <td>join_date: </td>
+          <td><input type="text" formControlName="join_date" name="join_date"> </td>
+        </tr>
+        <tr>
+          <td>kengen_group_cd: </td>
+          <td><input type="text" formControlName="kengen_group_cd" name="kengen_group_cd"> </td>
+        </tr>
+        <tr>
+          <td>leaving_date: </td>
+          <td><input type="text" formControlName="leaving_date" name="leaving_date"> </td>
+        </tr>
+        <tr>
+          <td>level: </td>
+          <td><input type="text" formControlName="level" name="level"> </td>
+        </tr>
+        <tr>
+          <td>mobile_tel: </td>
+          <td><input type="text" formControlName="mobile_tel" name="mobile_tel"> </td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="text-center">
+      <button class="btn btn-success" type="submit">add</button>
+    </div>
+</form>

@@ -1,0 +1,6 @@
+<button (click)="changeStatus()" class="btn btn-primary">click Here</button>
+<!-- <app-warning-alert></app-warning-alert> -->
+<input type="text" [(ngModel)]="serverTest">
+<p *ngIf="textTest">{{serverTest}}</p>
+<app-warning-alert *ngFor="let server of serverGet"></app-warning-alert>
+
