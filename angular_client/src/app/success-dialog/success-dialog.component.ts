@@ -4,7 +4,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 @Component({
   selector: 'app-success-dialog',
   templateUrl: './success-dialog.html',
-  styles:[``]
+  styles:['./success-dialog.component.css']
 })
 export class SuccessDialog {
   constructor(public dialogRef: MatDialogRef<SuccessDialog>) {}

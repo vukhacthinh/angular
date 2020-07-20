@@ -18,8 +18,10 @@ import { DialogDetailEmployee } from './employees/detail/detail.component';
 import { DialogAddEmployee } from './employees/add/add.component';
 import { ConfirmationDialog } from './confirm-dialog/confirm-dialog.component';
 import { SuccessDialog } from './success-dialog/success-dialog.component';
+import { ErrorDialog } from './error-dialog/error-dialog.component';
 import { DialogEditEmployee } from './employees/edit/edit.component';
 import { DashBoardComponent } from './dashboard/dashboard.component';
+import { SwalComponent } from './popup/swal.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,8 +34,10 @@ import { DashBoardComponent } from './dashboard/dashboard.component';
     DialogAddEmployee,
     ConfirmationDialog,
     SuccessDialog,
+    ErrorDialog,
     DialogEditEmployee,
-    DashBoardComponent
+    DashBoardComponent,
+    SwalComponent
   ],
   imports: [
     BrowserModule,

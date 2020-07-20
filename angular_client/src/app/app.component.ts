@@ -18,8 +18,8 @@ export class AppComponent {
 
     }
 
-    logout() {
+  public logout() {
         this.authenticationService.logout();
         this.router.navigate(['/login']);
-    }
+  }
 }

@@ -5,12 +5,13 @@ import { map, toArray } from 'rxjs/operators';
 
 import { User, EmployeeDetail } from '../_model';
 import { $ } from 'protractor';
+import {AppComponent} from '../app.component';
 
 @Injectable({ providedIn: 'root' })
 export class EmployeeService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
-
+    public AppComponent: AppComponent;
     constructor(private http: HttpClient) {
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
         this.currentUser = this.currentUserSubject.asObservable();

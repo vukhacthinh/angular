@@ -39,7 +39,7 @@ class DashboardController extends AppController
 {
     public function index()
     {
-        $employees = $this->Employees->find()->orderAsc('employee_code');
+//        $employees = $this->Employees->find()->orderAsc('employee_code');
     }
 }
 
