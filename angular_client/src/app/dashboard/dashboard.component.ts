@@ -19,47 +19,54 @@ export class DashBoardComponent implements OnInit{
   todayConvert = '';
   ngOnInit()
   {
-    // console.log(this.getDaysInMonth(7,2020));
     this.days = this.getDaysInMonth(6,2020);
-    console.log(this.days);
-    // console.log(this.days);
-    let today = new Date();
-    let dd = String(today.getDate()).padStart(2, '0');
-    let mm = String(today.getMonth()).padStart(2, '0'); //January is 0!
-    let yyyy = today.getFullYear();
+    const firstDateCalendar = this.days[0];
+    const lastDateCalendar = this.days.slice(-1).pop();
+    const firstDay = new Date(firstDateCalendar.getFullYear(), firstDateCalendar.getMonth(), 1);
+    var lastDay = new Date(lastDateCalendar.getFullYear(), lastDateCalendar.getMonth() + 1, 0);
+    let yesterday = new Date();
+    let firstArr = [];
+    let lastArr = [];
+    for(let i = 0;i <= firstDay.getDay(); i++)
+    {
+      let abc = firstDay.setDate(firstDay.getDate() - 1)
+      firstArr.push(new Date(abc));
+      firstArr = firstArr.reverse();
+    }
+    let letDay = lastDay.getDay();
+    if(letDay ==0){
+      letDay = 6;
+    }
+    for(let i = 0;i < (7 - letDay); i++)
+    {
+      let abc = lastDay.setDate(lastDay.getDate() + 1)
+      lastArr.push(new Date(abc));
+      // lastArr = lastArr.reverse();
+    }
+    let abcd = firstArr.concat(this.days);
+    let abcde = abcd.concat(lastArr);
+    this.days = abcde;
 
-     this.todayConvert = dd+'/'+mm+'/'+yyyy;
-    // console.log(todayConvert);
   }
   trArr: any[] = [
-    {},{},{},{},{},{},{}
+    {},{},{},{},{}
   ];
   tdArr: any[] = [
-
     {},{},{},{},{},{},{}
   ];
-
-  // public getDaysInMonth(month, year) {
-  //   var date = new Date(year, month, 1);
-  //   var days = [];
-  //   while (date.getMonth() === month) {
-  //   for(let i = 0;i<31;i++)
-  //   {
-  //     this.days.push({'date':new Date().toJSON().slice(0,10).replace(/-/g,'/')});
-  //   }
-  //     days.push({new Date(date).toJSON().slice(0,10).replace(/-/g,'/') : });
-  //     date.setDate(date.getDate() + 1);
-  //   }
-  //   return days;
-  // }
+  Array = [];
   public getDaysInMonth(month, year) {
     var date = new Date(year, month,1);
     var days = [];
     while (date.getMonth() === month) {
-      days.push({'date':new Date(date).toJSON().slice(0,10).replace(/-/g,'/')});
+      days.push(new Date(date));
       date.setDate(date.getDate() + 1);
     }
     return days;
   }
+  // public setDayOfWeek()
+  // {
+  //   let arrayRandom = this.trArr.push(this.days);
+  // }
 
 }

@@ -64,9 +64,7 @@ export class EmployeeService {
       // form.append('aa',);
       let body = formAddEmployee;
       // let body = JSON.stringify(formAddEmployee);
-      // console.log(JSON.stringify(body));
       // let body1 = Object.entries(body)
-      console.log(body);
       return this.http.post<any>(`http://localhost:8765/employees/add`,body)
     }
     edit(id,formAddEmployee)

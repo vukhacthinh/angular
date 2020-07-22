@@ -13,7 +13,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let trAr of trArr; let a = index;">
-        <td *ngFor="let tdAr of tdArr; let i = index;">{{a * 7 + i}}////{{days[a * 7 + i].date}}</td>
+        <td *ngFor="let tdAr of tdArr; let i = index;">{{days[a * 7 + i]}}</td>
       </tr>
     </tbody>
     </table>

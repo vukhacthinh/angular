@@ -21,7 +21,7 @@ import { SuccessDialog } from './success-dialog/success-dialog.component';
 import { ErrorDialog } from './error-dialog/error-dialog.component';
 import { DialogEditEmployee } from './employees/edit/edit.component';
 import { DashBoardComponent } from './dashboard/dashboard.component';
-import { SwalComponent } from './popup/swal.component';
+import { SwalPopup } from './popup/swal.popup';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,8 +36,7 @@ import { SwalComponent } from './popup/swal.component';
     SuccessDialog,
     ErrorDialog,
     DialogEditEmployee,
-    DashBoardComponent,
-    SwalComponent
+    DashBoardComponent
   ],
   imports: [
     BrowserModule,

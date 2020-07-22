@@ -7,7 +7,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import { DialogDetailEmployee } from './detail/detail.component';
 import { DialogAddEmployee } from './add/add.component';
 import { DialogEditEmployee } from './edit/edit.component';
-import { SwalComponent } from '../popup/swal.component';
+import { SwalPopup } from '../popup/swal.popup';
 
 @Component({
   selector: 'app-employees',
@@ -24,7 +24,7 @@ export class EmployeesComponent implements OnInit {
     private EmployeeService:EmployeeService,
     private dialog: MatDialog,
     private PopupService: PopupService,
-    private SwalComponent: SwalComponent,
+    private SwalPopup: SwalPopup,
   ) { }
 
   ngOnInit() {
@@ -39,15 +39,14 @@ export class EmployeesComponent implements OnInit {
               this.employees= data;
           },
           error => {
-            alert('error');
+            this.SwalPopup.opensweetalertdng();
           });
   }
    delete(id){
     this.PopupService.openConfirmationDialog().afterClosed().subscribe(result => {
       if(result) {
         this.EmployeeService.delete(id).pipe().subscribe(data=>{
-          // this.PopupService.openSuccessDialog();
-          this.SwalComponent.opensweetalert();
+          this.SwalPopup.opensweetalert();
           this.loadAllEmployees();
         },
         error => {

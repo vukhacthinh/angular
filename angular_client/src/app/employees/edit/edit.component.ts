@@ -4,7 +4,7 @@ import {EmployeeDetail} from '../../_model';
 import { Observable, from } from 'rxjs';
 import { FormControl, FormGroup,FormBuilder} from '@angular/forms';
 import {EmployeeService} from '../../_services';
-import {PopupService} from '../../_services/'
+import {SwalPopup} from '../../popup/'
 
 // export interface DialogData {
 //   animal: string;
@@ -33,7 +33,7 @@ export class DialogEditEmployee implements OnInit{
     public dialogRef: MatDialogRef<DialogEditEmployee>,
     public formClient: FormBuilder,
     public EmployeeService: EmployeeService,
-    public PopupService:PopupService,
+    public SwalPopup:SwalPopup,
     @Inject(MAT_DIALOG_DATA) public data) {
       this.currentUser = data;
       this.formAddEmployee = this.formClient.group({
@@ -71,7 +71,7 @@ export class DialogEditEmployee implements OnInit{
     this.EmployeeService.edit(id,this.formAddEmployee.value).pipe().subscribe(data=>{
       this.dialogRef.close();
       this.dialogRef.afterClosed().subscribe(result => {
-        this.PopupService.openSuccessDialog();
+        this.SwalPopup.opensweetalert();
       });
     },
     error =>{});

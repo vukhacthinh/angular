@@ -40,6 +40,17 @@ class LoginController extends AppController
 
         if ($this->request->is('post')) {
             $params = $this->request->getData();
+            $abc = new DefaultPasswordHasher();
+            $employeeLoginGet = $this->Employees->find()->where(['employee_code'=>$params['username']]);
+            $response = $abc->check($params['password'],$employeeLoginGet->first()->password);
+            if($response){
+                return $this->responseJson($employeeLoginGet);
+            }
+            else{
+                return false;
+            }
+
+            return $this->responseJson((new DefaultPasswordHasher())->hash('123456'));
             $employeeLogin = $this->Employees->find()->where(['employee_code'=>$params['username']]);
             if($employeeLogin){
                 return $this->responseJson($employeeLogin);
