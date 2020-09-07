@@ -7,6 +7,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import { DialogDetailEmployee } from './detail/detail.component';
 import { DialogAddEmployee } from './add/add.component';
 import { DialogEditEmployee } from './edit/edit.component';
+import { SwalPopup } from '../popup/swal.popup';
 
 @Component({
   selector: 'app-employees',
@@ -23,11 +24,12 @@ export class EmployeesComponent implements OnInit {
     private EmployeeService:EmployeeService,
     private dialog: MatDialog,
     private PopupService: PopupService,
+    private SwalPopup: SwalPopup,
   ) { }
 
   ngOnInit() {
     this.loadAllEmployees();
-}
+  }
 
   public loadAllEmployees() {
       this.EmployeeService.getEmployee()
@@ -37,14 +39,14 @@ export class EmployeesComponent implements OnInit {
               this.employees= data;
           },
           error => {
-            alert('error');
+            this.SwalPopup.opensweetalertdng();
           });
   }
    delete(id){
     this.PopupService.openConfirmationDialog().afterClosed().subscribe(result => {
       if(result) {
         this.EmployeeService.delete(id).pipe().subscribe(data=>{
-          this.PopupService.openSuccessDialog();
+          this.SwalPopup.opensweetalert();
           this.loadAllEmployees();
         },
         error => {
@@ -57,8 +59,8 @@ export class EmployeesComponent implements OnInit {
   view(id): void {
     this.EmployeeService.view(id).pipe().subscribe(data=>{
       const dialogRef = this.dialog.open(DialogDetailEmployee, {
-        width: 'auto',
-        height:'auto',
+        width: '500px',
+        height:'900px',
         data: data
       });
       dialogRef.afterClosed().subscribe(result => {
@@ -71,18 +73,30 @@ export class EmployeesComponent implements OnInit {
   }
   add(): void {
       const dialogRef = this.dialog.open(DialogAddEmployee, {
-        width: 'auto',
-        height:'auto',
+        width: '500px',
+        height:'900px',
       });
       dialogRef.afterClosed().subscribe(result => {
         this.loadAllEmployees();
       });
+      let promise  = new Promise((returnTrue,returnFalse)=>{
+        let a = 1;
+        let b = 2;
+        if(a + b ==3){
+          returnTrue('Return True');
+        }
+        else{
+          returnFalse('Break');
+        }
+      });
+      promise.then((val) => console.log(val))      // logs the resolve argument
+       .catch((val) => console.log(val));
   }
   edit(id): void {
     this.EmployeeService.view(id).pipe().subscribe(data=>{
       const dialogRef = this.dialog.open(DialogEditEmployee, {
-        width: 'auto',
-        height:'auto',
+        width: '500px',
+        height:'900px',
         data: data
       });
       dialogRef.afterClosed().subscribe(result => {
@@ -92,6 +106,10 @@ export class EmployeesComponent implements OnInit {
     error => {
       alert('error');
     });
-
+  }
+  getToken() : void{
+    // this.EmployeeService.getCsrfToken().pipe().subscribe(data=>{
+    //   console.log(data.csrfToken);
+    //   });
   }
 }

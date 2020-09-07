@@ -61,7 +61,7 @@ $routes->scope('/', function (RouteBuilder $builder) {
      * Apply a middleware to the current route scope.
      * Requires middleware to be registered through `Application::routes()` with `registerMiddleware()`
      */
-//    $builder->applyMiddleware('csrf');
+    $builder->applyMiddleware('csrf');
 
     /*
      * Here, we are connecting '/' (base path) to a controller called 'Pages',
@@ -104,6 +104,9 @@ Router::scope('/api', function (RouteBuilder $routes) {
     $routes->resources('Articles', function (RouteBuilder $routes) {
         $routes->resources('Comments');
     });
+});
+Router::scope('/', function (RouteBuilder $routes) {
+    $routes->applyMiddleware('csrf');
 });
 //Router::parseExtensions('json');
 /*

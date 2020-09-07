@@ -5,12 +5,13 @@ import { map, toArray } from 'rxjs/operators';
 
 import { User, EmployeeDetail } from '../_model';
 import { $ } from 'protractor';
+import {AppComponent} from '../app.component';
 
 @Injectable({ providedIn: 'root' })
 export class EmployeeService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
-
+    public AppComponent: AppComponent;
     constructor(private http: HttpClient) {
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
         this.currentUser = this.currentUserSubject.asObservable();
@@ -41,6 +42,10 @@ export class EmployeeService {
     }
     view(id :number)
     {
+      this.http
+                .get('http://en.wikipedia.org/w/api.php?callback=JSONP_CALLBACK')
+                .toPromise()
+                .then((response) => 1);
       return this.http.get(`http://localhost:8765/employees/view/${id}`);
     }
     add(formAddEmployee)
@@ -59,23 +64,31 @@ export class EmployeeService {
       }
       // var headers = new Headers();
       let urlSearchParams = new URLSearchParams();
-      let form = new FormData();
+      let form : FormData = new FormData();
       // form.append('aa',);
+      // form.append('upload',fileToUpload, fileToUpload.name);
+      // console.log(form);
       let body = formAddEmployee;
       // let body = JSON.stringify(formAddEmployee);
-      // console.log(JSON.stringify(body));
       // let body1 = Object.entries(body)
-      console.log(body);
       return this.http.post<any>(`http://localhost:8765/employees/add`,body)
     }
     edit(id,formAddEmployee)
     {
       let body = formAddEmployee;
-      return this.http.post<any>(`http://localhost:8765/employees/edit/${id}`,body);
+      // this.getCsrfToken().pipe().subscribe(data=>{
+        // let headers = new HttpHeaders({'Content-Type': 'application/json','X-CSRF-Token' : data.csrfToken});
+        return this.http.post<any>(`http://localhost:8765/employees/edit/${id}`,body);
+      // });
     }
     logout()
     {
       localStorage.removeItem('currentUser');
       this.currentUserSubject.next(null);
+    }
+    getCsrfToken()
+    {
+      let headers = new HttpHeaders({'Content-Type': 'application/json'});
+      return this.http.get<any>(`http://localhost:8765/employees/cookie`,{ headers, withCredentials: true }).toPromise();
     }
 }

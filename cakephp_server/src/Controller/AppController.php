@@ -44,11 +44,6 @@ class AppController extends Controller
      */
     public function initialize(): void
     {
-//        $this->response->withHeader('Access-Control-Allow-Origin', '*');
-//        $this->all
-        $cookie = new Cookie('csrfToken', 'my-csrf-token');
-        $cookies = new CookieCollection([$cookie]);
-        $cookies = $cookies->add($cookie);
         parent::initialize();
 //        $this->loadComponent('Authorization.Authorization');
         $this->loadModel('Employees');

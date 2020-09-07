@@ -85,6 +85,17 @@
           <td>mobile_tel: </td>
           <td><input type="text" formControlName="mobile_tel" value="{{currentUser.mobile_tel}}" name="mobile_tel"> </td>
         </tr>
+        <tr>
+          <td>avatar: </td>
+          <input type="file" (change)="handleFileInput($event)" #fileInput>
+          <td><input type="hidden" formControlName="avatar_id" value="{{avatar_id}}" [(ngModel)]="avatar_id" name="avatar_id"> </td>
+        </tr>
+        <tr>
+          <td>avatar :</td>
+          <td>
+            <img src="{{avatar_id}}" alt="" width="30%" height="10%">
+          </td>
+        </tr>
       </tbody>
     </table>
 </div>

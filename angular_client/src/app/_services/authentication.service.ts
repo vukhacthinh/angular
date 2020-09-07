@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -20,13 +20,15 @@ export class AuthenticationService {
     }
 
     login(username: string, password: string) {
-        return this.http.post<any>(`http://localhost:8765/login`, { username, password })
+      let headers = new HttpHeaders({'Content-Type': 'application/json'});
+      headers.append('X-CSRF-Token', document.cookie);
+        return this.http.post<any>(`http://localhost:8765/login`, { username, password },{ headers: headers })
             .pipe(map(user => {
                 // login successful if there's a jwt token in the response
-                if (user.length >0) {
+                if (user) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify(user[0]));
-                    this.currentUserSubject.next(user[0]);
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    this.currentUserSubject.next(user);
                 }
                 return user;
             }));

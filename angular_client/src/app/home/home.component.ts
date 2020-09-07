@@ -10,6 +10,15 @@ export class HomeComponent implements OnInit, OnDestroy {
     currentUser: User;
     currentUserSubscription: Subscription;
     users: User[] = [];
+    days = [];
+    todayConvert = '';
+    trArr: any[] = [
+      {},{},{},{},{},{},{}
+    ];
+    tdArr: any[] = [
+
+      {},{},{},{},{},{},{}
+    ];
     constructor(
         private authenticationService: AuthenticationService,
         private userService: UserService
@@ -20,7 +29,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.loadAllUsers();
+        // this.loadAllUsers();
+        this.days = this.getDaysInMonth(6,2020);
+        let today = new Date();
+        let dd = String(today.getDate()).padStart(2, '0');
+        let mm = String(today.getMonth()).padStart(2, '0'); //January is 0!
+        let yyyy = today.getFullYear();
+
+         this.todayConvert = dd+'/'+mm+'/'+yyyy;
     }
 
     ngOnDestroy() {
@@ -28,15 +44,26 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.currentUserSubscription.unsubscribe();
     }
 
-    deleteUser(id: number) {
-        this.userService.delete(id).pipe(first()).subscribe(() => {
-            this.loadAllUsers()
-        });
+  // public getDaysInMonth(month, year) {
+  //   var date = new Date(year, month, 1);
+  //   var days = [];
+  //   while (date.getMonth() === month) {
+  //   for(let i = 0;i<31;i++)
+  //   {
+  //     this.days.push({'date':new Date().toJSON().slice(0,10).replace(/-/g,'/')});
+  //   }
+  //     days.push({new Date(date).toJSON().slice(0,10).replace(/-/g,'/') : });
+  //     date.setDate(date.getDate() + 1);
+  //   }
+  //   return days;
+  // }
+  public getDaysInMonth(month, year) {
+    var date = new Date(year, month,1);
+    var days = [];
+    while (date.getMonth() === month) {
+      days.push({'date':new Date(date).toJSON().slice(0,10).replace(/-/g,'/')});
+      date.setDate(date.getDate() + 1);
     }
-
-    private loadAllUsers() {
-        // this.userService.getAll().pipe(first()).subscribe(users => {
-        //     this.users = users;
-        // });
-    }
+    return days;
+  }
 }

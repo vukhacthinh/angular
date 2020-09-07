@@ -40,95 +40,17 @@ class LoginController extends AppController
 
         if ($this->request->is('post')) {
             $params = $this->request->getData();
-            $employeeLogin = $this->Employees->find()->where(['employee_code'=>$params['username']]);
-            if($employeeLogin){
-                return $this->responseJson($employeeLogin);
+            $abc = new DefaultPasswordHasher();
+            $employeeLoginGet = $this->Employees->find()->where(['employee_code'=>$params['username']]);
+            $response = $abc->check($params['password'],$employeeLoginGet->first()->password);
+            if($response){
+                return $this->responseJson($employeeLoginGet);
             }
-            return false;
-            return $this->responseJson($params);
-            $login = new Employee();
-            $login = $this->Employees->PatchEntity($login, $params);
-            if ($login->getErrors()) {
-                //Write login log: failure
-                $this->writeLoginLog($params['employee_code'], 2);
-                //END Write login log
-                $errors_valid = $login->errors();
-                $this->set(compact('errors_valid'));
-                $this->set('obj_login', $login);
-            } else {
-                $identify = $this->Auth->identify();
-                //Validate lock
-                $lock = $this->Employees->PatchEntity($login, $params);
-                if ($lock->getErrors()) {
-                    //Write login log: failure
-                    $this->writeLoginLog($params['employee_code'], 3);
-                    //END Write login log
-
-                    $errors_valid = $lock->errors();
-                    $this->set(compact('errors_valid'));
-                    $this->set('obj_login', $lock);
-
-                } else {
-                    if ($identify) {//find user login in database
-                        $user = $this->Employees->get($identify['id']);
-                        $user->login_failed_count = 0;
-                        $user->last_login_exec = date('Y-m-d H:i:s');
-
-                        $storeUser = $this->Employees->get($identify['id'], [
-                        ]);
-                        //Set user ID to Session
-                        $this->Auth->setUser($storeUser);
-                        $this->Employees->save($user, array('loginupdate' => 1));
-
-                        //Write login log: success
-                        $user = $this->Employees->get($this->Auth->user()['id'])->toArray();
-                        $this->writeLoginLog($user['employee_code'], 1);
-                        //END Write login log
-//                            $this->clearOldCookies();
-                        return $this->redirect($params['redirect']);
-                    } else {//cannot find user in database
-                        $user = $this->Employees->getByLoginName($params['employee_code']);
-                        //update user login failed count
-                        if (!empty($user)) {
-                            $user->login_failed_count = $user->login_failed_count + 1;
-                            $user->last_login_exec = date('Y-m-d H:i:s');
-                            $this->Employees->save($user, array('loginupdate' => 1));
-                        }
-                        $errors = __('pass_word or username not correct');//id or password is not correct
-                        $this->set(compact('errors'));
-
-                        //Write login log: failure
-                        $this->writeLoginLog($params['employee_code'], 2);
-                        //END Write login log
-                    }
-                }
-//            }
+            else{
+                return false;
             }
         }
-//        $listEmployee = $this->Employees->find();
-//        dd($this->responseJson($listEmployee));++++++++++++++++++
-//            $this->Authorization->authorize($data, 'update');
-//
-//            $user = $this->Auth->identify();
-//            if ($user) {
-//                $this->Auth->setUser($user);
-//                return $this->redirect($this->Auth->redirectUrl());
-//            } else {
-//                echo __('Username or password is incorrect');
-//            }
     }
-    public function abc()
-    {
-//        $abc = $this->Employees->newEntity([]);
-        if ($this->Auth->User()) {
-            return $this->redirect($this->Auth->redirectUrl());
-        }
-    }
-//    private function clearOldCookies(){
-//        foreach (\Constants::$cst_function['division'] as $k => $v){
-//            $this->Cookie->delete('group_menu_'.$k);
-//        }
-//    }
     /**
      * Write login log if CST_LOGIN_LOG==1
      *

@@ -25,4 +25,5 @@ export class EmployeeDetail {
   level: number;
   mobile_tel: string;
   password: string;
+  avatar_id: string;
 }

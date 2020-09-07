@@ -1,7 +1,11 @@
 <div class="all-background" style="color: red;">
   <h1 md-dialog-title>Success</h1>
   <div md-dialog-content>{{confirmMessage}}</div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+        </div>
+    </div>
 </div>
-<div md-dialog-actions>
-  <button class="btn btn-primary" md-button (click)="dialogRef.close(true)">OK</button>
+<div md-dialog-actions class="text-center">
+  <button class="btn btn-success" md-button (click)="dialogRef.close(true)">OK</button>
 </div>

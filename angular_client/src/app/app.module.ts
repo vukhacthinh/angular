@@ -18,8 +18,12 @@ import { DialogDetailEmployee } from './employees/detail/detail.component';
 import { DialogAddEmployee } from './employees/add/add.component';
 import { ConfirmationDialog } from './confirm-dialog/confirm-dialog.component';
 import { SuccessDialog } from './success-dialog/success-dialog.component';
+import { ErrorDialog } from './error-dialog/error-dialog.component';
 import { DialogEditEmployee } from './employees/edit/edit.component';
 import { DashBoardComponent } from './dashboard/dashboard.component';
+import { SwalPopup } from './popup/swal.popup';
+import { MaterialModule } from './material.module';
+import { ForbiddenValidatorDirective } from './employees/validator/forbidden-name.directive';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,8 +36,10 @@ import { DashBoardComponent } from './dashboard/dashboard.component';
     DialogAddEmployee,
     ConfirmationDialog,
     SuccessDialog,
+    ErrorDialog,
     DialogEditEmployee,
-    DashBoardComponent
+    DashBoardComponent,
+    ForbiddenValidatorDirective
   ],
   imports: [
     BrowserModule,
@@ -43,7 +49,7 @@ import { DashBoardComponent } from './dashboard/dashboard.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatDialogModule,
-
+    MaterialModule
   ],
   providers: [fakeBackendProvider],
   bootstrap: [AppComponent],

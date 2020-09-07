@@ -29,10 +29,17 @@ use Cake\View\Exception\MissingTemplateException;
  *
  * @link https://book.cakephp.org/4/en/controllers/pages-controller.html
  */
+/**
+ * Employees Controller
+ *
+ * @property \App\Model\Table\EmployeesTable $Employees
+ * @method \App\Model\Entity\Employee[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ */
 class DashboardController extends AppController
 {
-   public function index()
-   {
-
-   }
+    public function index()
+    {
+//        $employees = $this->Employees->find()->orderAsc('employee_code');
+    }
 }
+

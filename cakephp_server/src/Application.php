@@ -76,6 +76,10 @@ class Application extends BaseApplication
      */
     public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
     {
+        $options = [
+            // ...
+        ];
+//        $csrf = new CsrfProtectionMiddleware($options);
         $middlewareQueue
             // Catch any exceptions in the lower layers,
             // and make an error page/response
@@ -163,4 +167,14 @@ class Application extends BaseApplication
 //
 //        return $service;
 //    }
+    public function routes($routes) : void
+    {
+        $options = [
+            // ...
+        ];
+        $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware($options));
+        parent::routes($routes);
+    }
+
+    // in config/routes.php
 }

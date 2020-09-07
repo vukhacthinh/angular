@@ -13,15 +13,19 @@
     </thead>
     <tbody>
       <tr *ngFor="let trAr of trArr; let a = index;">
-        <td *ngFor="let tdAr of tdArr; let i = index;">{{a * 7 + i}}////{{days[a * 7 + i].date}}</td>
+        <td *ngFor="let tdAr of tdArr; let i = index;">{{days[a * 7 + i]}}</td>
       </tr>
     </tbody>
     </table>
-    <button class="btn btn-info">
+    <button class="btn btn-info" (click)="nextBackMonth('prev')">
         Pre
     </button>
-    <input type="date" ([ngModel])="todayConvert"/>
-    <button class="btn btn-info">
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" (dateChange)="changeMonth($event)" [(ngModel)]="currentTime" [formControl]="monthPicker" placeholder="Choose a date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker startView="year" ></mat-datepicker>
+    </mat-form-field>
+    <button class="btn btn-info" (click)="nextBackMonth('next')">
       Next
     </button>
 </form>
