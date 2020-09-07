@@ -5,11 +5,19 @@
       <tbody>
         <tr>
           <td>employee_code: </td>
-          <td><input type="text" formControlName="employee_code" name="employee_code"> </td>
+          <td>
+            <input type="text" formControlName="employee_code" name="employee_code">
+            <div *ngIf="f.employee_code.errors" class="invalid-feedback">
+              <div *ngIf="f.employee_code.errors.required">Employee Code is required</div>
+            </div>
+          </td>
         </tr>
         <tr>
           <td>password: </td>
-          <td><input type="text" formControlName="password" name="password"> </td>
+          <td><input type="text" formControlName="password" name="password">
+            <div *ngIf="f.password.errors.required">Password is required</div>
+            <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+          </td>
         </tr>
         <tr>
           <td>family_name: </td>
@@ -77,12 +85,21 @@
         </tr>
         <tr>
           <td>mobile_tel: </td>
-          <td><input type="text" formControlName="mobile_tel" name="mobile_tel"> </td>
+          <td>
+            <input type="text" formControlName="mobile_tel" name="mobile_tel">
+          </td>
+        </tr>
+        <tr>
+          <td>avatar: </td>
+          <td>
+            <input type="file" (change)="handleFileInput($event)" #fileInput>
+            <input type="hidden" formControlName="avatar_id" name="avatar_id" [(ngModel)]="text" value="{{text}}" #avatar>
+          </td>
         </tr>
       </tbody>
     </table>
     </div>
-
+    <div id="imgTest"></div>
     <div class="text-center">
       <button class="btn btn-success" type="submit">add</button>
     </div>

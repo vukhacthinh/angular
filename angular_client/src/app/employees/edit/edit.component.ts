@@ -25,6 +25,7 @@ import {SwalPopup} from '../../popup/'
   `]
 })
 export class DialogEditEmployee implements OnInit{
+  avatar_id = '';
   public currentUser: EmployeeDetail;
   formAddEmployee: FormGroup;
   // detail:DialogData;
@@ -57,7 +58,9 @@ export class DialogEditEmployee implements OnInit{
         leaving_date: this.currentUser.leaving_date,
         level: this.currentUser.level,
         mobile_tel: this.currentUser.mobile_tel,
+        avatar_id: this.currentUser.avatar_id,
       })
+      this.avatar_id = data.avatar_id;
     }
 
   ngOnInit(){
@@ -75,6 +78,23 @@ export class DialogEditEmployee implements OnInit{
       });
     },
     error =>{});
+  }
+  handleFileInput(event) {
+    if(event.target.files.length > 0) {
+      let filesSelected = event.target.files[0];
+      let fileReader = new FileReader();
+      fileReader.onload= (fileLoadedEvent) => {
+
+        let srcData = fileLoadedEvent.target.result; // <--- data: base64
+        // var newImg = new Image();
+        let newImg = document.createElement('img');
+        newImg.src = srcData as string;
+        this.avatar_id = fileReader.result as string;
+        return srcData;
+
+      };
+      fileReader.readAsDataURL(filesSelected);
+    }
   }
 
 }

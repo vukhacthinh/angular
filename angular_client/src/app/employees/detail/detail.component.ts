@@ -22,6 +22,7 @@ import { Observable } from 'rxjs';
   `]
 })
 export class DialogDetailEmployee{
+  avatar = '';
   public currentUser: EmployeeDetail;
   // detail:DialogData;
   listDetail;
@@ -29,6 +30,7 @@ export class DialogDetailEmployee{
     public dialogRef: MatDialogRef<DialogDetailEmployee>,
     @Inject(MAT_DIALOG_DATA) public data) {
       this.currentUser = data;
+      this.avatar = data.avatar_id;
     }
 
   // ngOnInit(){

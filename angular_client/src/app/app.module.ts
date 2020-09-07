@@ -22,6 +22,8 @@ import { ErrorDialog } from './error-dialog/error-dialog.component';
 import { DialogEditEmployee } from './employees/edit/edit.component';
 import { DashBoardComponent } from './dashboard/dashboard.component';
 import { SwalPopup } from './popup/swal.popup';
+import { MaterialModule } from './material.module';
+import { ForbiddenValidatorDirective } from './employees/validator/forbidden-name.directive';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +38,8 @@ import { SwalPopup } from './popup/swal.popup';
     SuccessDialog,
     ErrorDialog,
     DialogEditEmployee,
-    DashBoardComponent
+    DashBoardComponent,
+    ForbiddenValidatorDirective
   ],
   imports: [
     BrowserModule,
@@ -46,7 +49,7 @@ import { SwalPopup } from './popup/swal.popup';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatDialogModule,
-
+    MaterialModule
   ],
   providers: [fakeBackendProvider],
   bootstrap: [AppComponent],

@@ -10,4 +10,5 @@ export class ErrorDialog {
   constructor(public dialogRef: MatDialogRef<ErrorDialog>) {}
 
   public confirmMessage:string;
+  
 }

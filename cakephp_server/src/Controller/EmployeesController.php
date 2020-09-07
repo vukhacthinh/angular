@@ -3,6 +3,11 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\Collection\Collection;
+use Cake\Http\Cookie\CookieCollection;
+use Cake\Http\ServerRequest;
+use http\Env\Request;
+
 /**
  * Employees Controller
  *
@@ -18,11 +23,8 @@ class EmployeesController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-        ];
-
+        $this->paginate = [];
         $employees = $this->Employees->find()->orderAsc('employee_code');
-
         return $this->responseJson($employees);
 //        $this->set(compact('employees'));
     }
@@ -36,6 +38,7 @@ class EmployeesController extends AppController
      */
     public function view($id = null)
     {
+//        $abc = $this->request->getCookieCollection()->get('csrfToken')->getScalarValue();
         $employee = $this->Employees->get($id, []);
         return $this->responseJson($employee);
     }
@@ -47,14 +50,13 @@ class EmployeesController extends AppController
      */
     public function add()
     {
-        $employee = $this->Employees->newEmptyEntity();
+        $employee = $this->Employees->newEntity([]);
         if ($this->request->is('post')) {
             $employee = $this->Employees->patchEntity($employee, $this->request->getData());
-
             if ($this->Employees->save($employee)) {
-                return $this->responseJson(['msg'=>'The employee has been saved.'],200);
+                return $this->responseJson(['msg'=>'The employee has been saved.','status'=>200],200);
             }
-            return $this->responseJson(['msg'=>'The employee could not be saved. Please, try again.'],409);
+            return $this->responseJson(['msg'=>'The employee could not be saved. Please, try again.','status'=>409],409);
         }
     }
 
@@ -71,9 +73,10 @@ class EmployeesController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $employee = $this->Employees->patchEntity($employee, $this->request->getData());
             if ($this->Employees->save($employee)) {
-                return $this->responseJson(__('The employee has been saved.'));
+
+                return $this->responseJson(['msg'=>'The employee has been saved.'],200);
             }
-            return $this->responseJson(__('The employee could not be saved. Please, try again.'));
+            return $this->responseJson(['msg'=>'The employee could not be saved. Please, try again.'],409);
         }
     }
 
@@ -93,5 +96,15 @@ class EmployeesController extends AppController
         } else {
             return $this->responseJson(['message' => __('The employee could not be deleted. Please, try again.')]);
         }
+    }
+    public function cookie()
+    {
+//        $abc = new ServerRequest();
+//        $a = $abc->getCookieCollection();
+        $abc = $this->request->getCookieCollection();
+        $abc = new Collection($abc);
+
+        $token = $abc->first()->getValue();
+        return $this->responseJson(['csrfToken'=>$token]);
     }
 }
