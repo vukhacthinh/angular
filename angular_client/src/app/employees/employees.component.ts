@@ -17,7 +17,7 @@ import { SwalPopup } from '../popup/swal.popup';
 export class EmployeesComponent implements OnInit {
   employees;
   listView;
-  Enddata;
+  // items =Array<string>;
   animal: string;
   name: string;
   constructor(
@@ -70,6 +70,7 @@ export class EmployeesComponent implements OnInit {
     error => {
       alert('error');
     });
+    // this.EmployeeService.view(id).then(items=> this.items = items);
   }
   add(): void {
       const dialogRef = this.dialog.open(DialogAddEmployee, {

@@ -1,0 +1,47 @@
+<form class="formAddEmployee" [formGroup]="formAddEmployee">
+  <div class="all-border">
+
+    <table class="table table-bordered table-hover">
+      <tbody>
+        <tr>
+          <td>employee_code: </td>
+          <td>
+            <input type="text" formControlName="employee_code" name="employee_code">
+            <div *ngIf="f.employee_code.errors" class="invalid-feedback">
+              <div *ngIf="f.employee_code.errors.required">Employee Code is required</div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>password: </td>
+          <td><input type="text" formControlName="password" name="password">
+            <div *ngIf="f.password.errors.required">Password is required</div>
+            <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span>Start Day</span>
+            <mat-form-field>
+              <input matInput [matDatepicker]="pickerst" placeholder="Choose a date">
+              <mat-datepicker-toggle matSuffix [for]="pickerst"></mat-datepicker-toggle>
+              <mat-datepicker #pickerst startView="year" ></mat-datepicker>
+            </mat-form-field>
+          </td>
+          <td>
+            <span>End Day</span>
+            <mat-form-field>
+              <input matInput [matDatepicker]="pickeren" placeholder="Choose a date">
+              <mat-datepicker-toggle matSuffix [for]="pickeren"></mat-datepicker-toggle>
+              <mat-datepicker #pickeren startView="year" ></mat-datepicker>
+            </mat-form-field>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <div id="imgTest"></div>
+    <div class="text-center">
+      <button class="btn btn-success" type="submit" (click)="saveTimeSheet()">saveTimeSheet</button>
+    </div>
+</form>

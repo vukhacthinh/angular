@@ -3,6 +3,8 @@ import {FormControl} from '@angular/forms';
 import {MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {MatDatepicker} from '@angular/material/datepicker';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {DialogAddTimeSheet} from './add/add.component';
 
 // Depending on whether rollup is used, moment needs to be imported differently.
 // Since Moment.js doesn't have a default export, we normally need to import using the `* as`
@@ -58,6 +60,12 @@ export class DashBoardComponent implements OnInit{
   monthPicker = new FormControl(this.currentTime);
   monthCurrent = this.currentTime.getMonth();
   yearCurrent = this.currentTime.getFullYear();
+  constructor(
+    public dialog: MatDialog,
+    // public DialogAddTimeSheet: DashBoardComponent
+  ) {
+
+  }
   ngOnInit()
   {
     this.khoiTao(this.monthCurrent,this.yearCurrent,this.monthPicker.value);
@@ -149,5 +157,15 @@ export class DashBoardComponent implements OnInit{
     let day = d.getDay(),
         diff = d.getDate() - day + (day == 0 ? -6:1); // adjust when day is sunday
     return new Date(d.setDate(diff));
+  }
+  timeSheet()
+  {
+    const dialogRef = this.dialog.open(DialogAddTimeSheet, {
+      width: '500px',
+      height:'900px'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      // this.animal = result;
+    });
   }
 }

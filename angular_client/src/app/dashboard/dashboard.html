@@ -1,19 +1,19 @@
 <form action="">
   <table class="table table-bordered table-hover">
-    <thead style="background-color: greenyellow;">
+    <thead >
       <tr>
-        <th>Mon</th>
-        <th>Tue</th>
-        <th>Wed</th>
-        <th>Thu</th>
-        <th>Fri</th>
-        <th>Sat</th>
-        <th>Sun</th>
+        <th class="week-day">Mon</th>
+        <th class="week-day">Tue</th>
+        <th class="week-day">Wed</th>
+        <th class="week-day">Thu</th>
+        <th class="week-day">Fri</th>
+        <th class="spe-day">Sat</th>
+        <th class="spe-day">Sun</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let trAr of trArr; let a = index;">
-        <td *ngFor="let tdAr of tdArr; let i = index;">{{days[a * 7 + i]}}</td>
+        <td (click)="timeSheet()" *ngFor="let tdAr of tdArr; let i = index;" [ngClass]="(i <5)?'week-day':'spe-day'">{{days[a * 7 + i]}}{{i}}</td>
       </tr>
     </tbody>
     </table>
@@ -29,3 +29,11 @@
       Next
     </button>
 </form>
+<style>
+  .week-day{
+    background-color: greenyellow;
+  }
+  .spe-day{
+    background-color: rgb(255, 196, 0);
+  }
+</style>
