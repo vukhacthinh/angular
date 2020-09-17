@@ -73,28 +73,6 @@ export class DialogAddEmployee{
     }
   // employee:{employee_code:'data.dddd'}
   ngOnInit(): void {
-    this.formAddEmployee = this.formClient.group({
-      employee_code: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      family_name: ['', [Validators.required]],
-      family_name_kana: ['', [Validators.required]],
-      first_name: ['', [Validators.required]],
-      first_name_kana: ['', [Validators.required]],
-      employeement_status: ['', [Validators.required]],
-      gender: ['', [Validators.required]],
-      address: ['', [Validators.required]],
-      company_id: ['', [Validators.required]],
-      area_id: ['', [Validators.required]],
-      birthday: ['', [Validators.required]],
-      company_section_id: ['', [Validators.required]],
-      email: ['', [Validators.required]],
-      join_date: ['', [Validators.required]],
-      kengen_group_cd: ['', [Validators.required]],
-      mobile_tel: ['', [Validators.required]],
-      avatar_id: ['', [Validators.required]],
-      leaving_date: ['', [Validators.required]],
-      level: ['', [Validators.required]]
-    });
   }
   get f() { return this.formAddEmployee.controls; }
   onNoClick(): void {

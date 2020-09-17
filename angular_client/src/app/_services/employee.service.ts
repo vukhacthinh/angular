@@ -42,10 +42,6 @@ export class EmployeeService {
     }
     view(id :number)
     {
-      this.http
-                .get('http://en.wikipedia.org/w/api.php?callback=JSONP_CALLBACK')
-                .toPromise()
-                .then((response) => 1);
       return this.http.get(`http://localhost:8765/employees/view/${id}`);
     }
     add(formAddEmployee)

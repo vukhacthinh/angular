@@ -17,15 +17,13 @@ export class AppComponent {
         public dialog: MatDialog
     ) {
         this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
-        let headers = new HttpHeaders({'Content-Type': 'application/json'});
-        let csrfToken = this.http.get<any>(`http://localhost:8765/employees/cookie`,{ headers, withCredentials: true }).pipe().subscribe(data=>{
-          let headers2 = new HttpHeaders({
-            'Content-Type': 'application/json'
-          });
-          return data;
-          console.log(data.csrfToken);
-        });
-      console.log(csrfToken);
+        // let headers = new HttpHeaders({'Content-Type': 'application/json'});
+        // let csrfToken = this.http.get<any>(`http://localhost:8765/employees/cookie`,{ headers, withCredentials: true }).pipe().subscribe(data=>{
+        //   let headers2 = new HttpHeaders({
+        //     'Content-Type': 'application/json'
+        //   });
+        //   return data;
+        // });
     }
 
       public logout() {

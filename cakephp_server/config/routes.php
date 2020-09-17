@@ -61,8 +61,8 @@ $routes->scope('/', function (RouteBuilder $builder) {
      * Apply a middleware to the current route scope.
      * Requires middleware to be registered through `Application::routes()` with `registerMiddleware()`
      */
-    $builder->applyMiddleware('csrf');
-
+//    $builder->applyMiddleware('csrf');
+//TODO CSRF
     /*
      * Here, we are connecting '/' (base path) to a controller called 'Pages',
      * its action called 'display', and we pass a param to select the view file
