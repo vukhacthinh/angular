@@ -11,9 +11,6 @@ import {MatDatepicker} from '@angular/material/datepicker';
 import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
 import {default as _rollupMoment, Moment} from 'moment';
-import { isBuffer } from 'util';
-
-const moment = _rollupMoment || _moment;
 export const MY_FORMATS = {
   parse: {
     dateInput: 'MM/YYYY',
@@ -46,6 +43,7 @@ export const MY_FORMATS = {
       provide: DateAdapter,
       useClass: MomentDateAdapter,
       deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+      //TODO CHECK USE OUTPUT DATEPICKER
     },
 
     {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
@@ -55,9 +53,11 @@ export class DashBoardComponent implements OnInit{
   days = [];
   dateInput = '';
   currentTime = new Date();
+  newCurrentTime = new Date();
   monthPicker = new FormControl(this.currentTime);
   monthCurrent = this.currentTime.getMonth();
   yearCurrent = this.currentTime.getFullYear();
+  listOnlyDay = [];
   ngOnInit()
   {
     this.khoiTao(this.monthCurrent,this.yearCurrent,this.monthPicker.value);
@@ -79,7 +79,6 @@ export class DashBoardComponent implements OnInit{
     return days;
   }
   public khoiTao(monthCurrent,yearCurrent,monthPicker){
-    console.log(this.currentTime.getMonth()+'valueInput');
     this.days = this.getDaysInMonth(monthCurrent,yearCurrent);
     let firstDateCalendar = this.days[0];
     let lastDateCalendar = this.getDaysInMonth(monthCurrent,yearCurrent).slice(-1).pop();
@@ -101,8 +100,6 @@ export class DashBoardComponent implements OnInit{
     } else {
         var currentDate = new Date(now.getFullYear(), now.getMonth() + 1, 1);
     }
-
-    let ar= [];
     for(let i = 0;i < 7-now.getDay(); i++)
     {
       if(new Date(lastDateCalendar).getDay() == 0){
@@ -114,13 +111,18 @@ export class DashBoardComponent implements OnInit{
     let abcd = firstArrCalendar.concat(this.days);
     let abcde = abcd.concat(lastArr);
     this.days = abcde;
+    let listOnlyDay = this.days;
   }
   changeMonth(event): void {
-    // this.khoiTao(event.value._i.month+1,event.value._i.year,this.monthPicker);
+    // console.log(event);
+    this.khoiTao(event.value._i.month,event.value._i.year,event.value._d);
+    this.newCurrentTime = this.currentTime = new Date(event.value._i.year,event.value._i.month,1);
+    console.log(this.currentTime);
   }
   nextBackMonth(params) {
     if(params == 'next'){
       var getMon =this.currentTime.getMonth() +1;
+      console.log(this.currentTime);
       if(getMon ==12){
         getMon = 0;
         this.currentTime = new Date(this.yearCurrent +=1,0,1);
@@ -128,9 +130,7 @@ export class DashBoardComponent implements OnInit{
       else{
         this.currentTime =  new Date(this.currentTime.setMonth(getMon));
       }
-      console.log('input');
-      console.log(getMon);
-      console.log(this.currentTime.getMonth());
+      this.newCurrentTime = this.currentTime;
       this.khoiTao(getMon,this.yearCurrent,this.currentTime);
     }else{
       let getMon = this.currentTime.getMonth()-1;
@@ -141,6 +141,7 @@ export class DashBoardComponent implements OnInit{
       else{
         this.currentTime =  new Date(this.currentTime.setMonth(getMon));
       }
+      this.newCurrentTime = this.currentTime;
       this.khoiTao(getMon,this.yearCurrent,this.currentTime);
     }
   }
