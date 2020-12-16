@@ -22,6 +22,7 @@ use Cake\I18n\Time;
 use Cake\Event\EventInterface;
 use Cake\Http\Cookie\Cookie;
 use Cake\Http\Cookie\CookieCollection;
+use Cake\Utility\Hash;
 
 /**
  * Application Controller
@@ -44,10 +45,17 @@ class AppController extends Controller
      */
     public function initialize(): void
     {
+
         parent::initialize();
+//        $this->loadComponent('Security');
 //        $this->loadComponent('Authorization.Authorization');
         $this->loadModel('Employees');
-//        $this->loadComponent('Security');
+        $this->loadModel('CheckinCheckOuts');
+        $this->loadModel('EmployeeTimeTables');
+        $this->loadModel('CompanySections');
+        $this->loadModel('EmployeePosts');
+        $this->loadModel('EmployeePostComments');
+        $this->loadModel('EmployeePostComments');
 //        $this->Auth->config('authenticate', ['Form']);
         /*
          * Enable the following component for recommended CakePHP form protection settings.
@@ -82,14 +90,15 @@ class AppController extends Controller
     }
     public function beforeRender(\Cake\Event\EventInterface $event) {
         $this->setCorsHeaders();
+
     }
 
     public function beforeFilter(EventInterface $event) {
-        parent::beforeFilter($event);
 
+        parent::beforeFilter($event);
+//        $this->Security->setConfig('unlockedActions', ['edit']);
         if ($this->request->is('options')) {
             $this->setCorsHeaders();
-            return $this->response;
         }
     }
 
@@ -97,14 +106,14 @@ class AppController extends Controller
         $this->response = $this->response->cors($this->request)
             ->allowOrigin(['*'])
             ->allowMethods(['*'])
-            ->allowHeaders([ 'Origin', 'Content-Type', 'X-Auth-Token'])
+            ->allowHeaders([ '*'])
             ->allowCredentials()
             ->exposeHeaders(['Link'])
             ->maxAge(300)
             ->build();
+
     }
     public function responseJson($queryData, $sttCode = 200){
-
         $item = json_encode($queryData);
         $body = $this->response->getBody();
         $body->write($item);

@@ -43,20 +43,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         // unsubscribe to ensure no memory leaks
         this.currentUserSubscription.unsubscribe();
     }
-
-  // public getDaysInMonth(month, year) {
-  //   var date = new Date(year, month, 1);
-  //   var days = [];
-  //   while (date.getMonth() === month) {
-  //   for(let i = 0;i<31;i++)
-  //   {
-  //     this.days.push({'date':new Date().toJSON().slice(0,10).replace(/-/g,'/')});
-  //   }
-  //     days.push({new Date(date).toJSON().slice(0,10).replace(/-/g,'/') : });
-  //     date.setDate(date.getDate() + 1);
-  //   }
-  //   return days;
-  // }
   public getDaysInMonth(month, year) {
     var date = new Date(year, month,1);
     var days = [];

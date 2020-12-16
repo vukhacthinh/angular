@@ -36,10 +36,9 @@ class LoginController extends AppController
      */
     public function index()
     {
-        $listEmployee = $this->Employees->find();
-
         if ($this->request->is('post')) {
             $params = $this->request->getData();
+
             $abc = new DefaultPasswordHasher();
             $employeeLoginGet = $this->Employees->find()->where(['employee_code'=>$params['username']]);
             $response = $abc->check($params['password'],$employeeLoginGet->first()->password);

@@ -49,7 +49,7 @@ use Constant;
  * @method \App\Model\Entity\Employee[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
  * @method \App\Model\Entity\Employee[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  */
-class EmployeesTable extends Table
+class EmployeesTable extends BaseTable
 {
     /**
      * Initialize method

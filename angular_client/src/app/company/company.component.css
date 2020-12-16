@@ -1,0 +1,29 @@
+li{
+  padding: 15px;
+}
+span{
+  background-color: black;
+  margin: 5px;
+  color: white;
+  padding: 5px;
+}
+/* span::after{
+  content:"";
+  display: inline-block;
+  height: 0.5em;
+  vertical-align: bottom;
+  width: 100%;
+  margin-right: -100%;
+  margin-left: 10px;
+  border-top: 4px solid black;
+} */
+/* span:not(:last-child)::before{
+  content:"";
+  display: inline-block;
+  height: 3em;
+  vertical-align: bottom;
+  width: 100%;
+  margin-right: -100%;
+  margin-left: -50px;
+  border-right: 4px solid black;
+} */

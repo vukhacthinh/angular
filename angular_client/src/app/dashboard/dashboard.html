@@ -1,33 +1,84 @@
-<form action="">
-  <table class="table table-bordered table-hover">
-    <thead >
-      <tr>
-        <th class="week-day">Mon</th>
-        <th class="week-day">Tue</th>
-        <th class="week-day">Wed</th>
-        <th class="week-day">Thu</th>
-        <th class="week-day">Fri</th>
-        <th class="spe-day">Sat</th>
-        <th class="spe-day">Sun</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let trAr of trArr; let a = index;">
-        <td (click)="timeSheet()" *ngFor="let tdAr of tdArr; let i = index;" [ngClass]="(i <5)?'week-day':'spe-day'">{{days[a * 7 + i]}}{{i}}</td>
-      </tr>
-    </tbody>
-    </table>
-    <button class="btn btn-info" (click)="nextBackMonth('prev')">
-        Pre
+<form action="" class="form-dashboard">
+  <div class="row row-calendar">
+    <div class="col-md-1">
+      <button class="btn" style="padding:15px; background-color: black; color:white" (click)="checkin()">check in</button>
+
+    </div>
+    <div class="col-md-10">
+      <table class="table table-bordered table-dashboard">
+        <thead class="thead-dashboard">
+          <tr>
+            <th class="th-header">Monday</th>
+            <th class="th-header">Tuesday</th>
+            <th class="th-header">Wednesday</th>
+            <th class="th-header">Thursday</th>
+            <th class="th-header">Friday</th>
+            <th class="th-header">Saturday</th>
+            <th class="th-header">Sunday</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let trAr of trArr; let a = index;">
+            <td (click)="timeSheet()" *ngFor="let tdAr of tdArr; let i = index;" class="td-calendar" [ngClass]="{month_current: Arrdays[a * 7 + i] ? Arrdays[a * 7 + i].month_current : ''}">
+              <div>
+                <span  class="{{Arrdays[a * 7 + i] ? Arrdays[a * 7 + i].today : ''}}_here">
+                  {{Arrdays[a * 7 + i] ? Arrdays[a * 7 + i].date : ''}}
+                </span>
+              </div>
+              <div>Shift:
+                <span>
+                  {{Arrdays[a * 7 + i] ? Arrdays[a * 7 + i].shift[i] : ''}}
+                </span>
+              </div>
+
+              <div>
+                <span>
+                  {{Arrdays[a * 7 + i]? Arrdays[a * 7 + i].data.check_in : 'sssss'}}&nbsp;
+                </span>
+                <span class="pull-right">
+                  {{Arrdays[a * 7 + i]? Arrdays[a * 7 + i].data.check_out : 'sssss'}}
+                </span>
+              </div>
+              <div>
+                <div *ngIf="Arrdays[a * 7 + i]" class="total-line-time">
+                  <div class="time-total" style="background-color: pink"  [ngStyle]="{'width.px': Arrdays[a * 7 + i].width_time_line,'margin-left.px':Arrdays[a * 7 + i].margin_time_line[i]}">
+                    &nbsp;
+                  </div>
+
+
+                </div>
+                <div class="start-end">
+                  &nbsp;
+                </div>
+                <div style=" width: 120px; margin-left: -20px; ">
+                  &nbsp;
+                </div>
+              </div>
+
+            </td>
+          </tr>
+        </tbody>
+        </table>
+    </div>
+    <div class="col-md-1">
+    <button class="btn pull-right" style="padding:15px; background-color: black; color:white" (click)="checkout()">check out</button>
+
+    </div>
+
+  </div>
+  <div class="row">
+    <button class="btn" style="background-color: black; color:white" (click)="nextBackMonth('prev')">
+      Prev
     </button>
     <mat-form-field>
-      <input matInput [matDatepicker]="picker" (dateChange)="changeMonth($event)" [(ngModel)]="currentTime" [formControl]="monthPicker" placeholder="Choose a date">
+      <input matInput [matDatepicker]="picker" (dateChange)="changeMonth($event)" (change)="changeInputMonth(currentTime)" [(ngModel)]="currentTime" [formControl]="monthPicker" placeholder="Choose a date">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker startView="year" ></mat-datepicker>
     </mat-form-field>
-    <button class="btn btn-info" (click)="nextBackMonth('next')">
+    <button class="btn " style="background-color: black; color:white" (click)="nextBackMonth('next')">
       Next
     </button>
+  </div>
 </form>
 <style>
   .week-day{

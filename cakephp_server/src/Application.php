@@ -104,7 +104,8 @@ class Application extends BaseApplication
                     ->withHeader('Access-Control-Allow-Credentials', 'true')
                     ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With')
                     ->withHeader('Access-Control-Allow-Headers', 'Content-Type')
-                    ->withHeader('Access-Control-Allow-Type', 'application/json');
+                    ->withHeader('Access-Control-Allow-Type', 'application/json')
+                    ;
             })
             // Parse various types of encoded request bodies so that they are
             // available as array through $request->getData()

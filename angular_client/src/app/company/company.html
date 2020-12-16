@@ -1,0 +1,30 @@
+
+<h1>Tree Company</h1>
+<ul>
+  <li>
+    <span>
+      {{arr[0] ? arr[0].name : ''}}
+    </span>
+    <ul>
+      <li >
+        <span>
+        {{arr[0] ? arr[0].children[1].name :''}}
+        </span>
+        <ul *ngFor="let item of arr[0].children[1].children">
+          <li>
+            <span>
+            {{item.name}}
+            </span>
+            <ul *ngFor="let items of item.children">
+              <li>
+                <span>
+                  {{items.name}}
+                </span>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>

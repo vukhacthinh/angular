@@ -88,4 +88,44 @@ export class EmployeeService {
       let headers = new HttpHeaders({'Content-Type': 'application/json'});
       return this.http.get<any>(`http://localhost:8765/employees/cookie`,{ headers, withCredentials: true }).toPromise();
     }
+    getCheckOutIn(){
+      let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      let headers = new HttpHeaders({'Content-Type': 'application/json'});
+      return this.http.get<any>(`http://localhost:8765/employees/syncTimeSheet/`+currentUser[0].id,{ headers, withCredentials: true });
+    }
+    checkin()
+    {
+      let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      let headers = new HttpHeaders({'Content-Type': 'application/json'});
+      return this.http.get<any>(`http://localhost:8765/employees/checkin/`+currentUser[0].id,{ headers, withCredentials: true });
+    }
+    checkout()
+    {
+      let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      let headers = new HttpHeaders({'Content-Type': 'application/json'});
+      return this.http.get<any>(`http://localhost:8765/employees/checkout/`+currentUser[0].id,{ headers, withCredentials: true });
+    }
+    getCompany()
+    {
+      let headers = new HttpHeaders({'Content-Type': 'application/json'});
+      return this.http.get<any>(`http://localhost:8765/employees/company/`,{ headers, withCredentials: true });
+    }
+    savePost(data){
+      let headers = new HttpHeaders({'Content-Type': 'application/json'});
+      let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      // data.push({'id':currentUser[0].id});
+      data.employee_id = currentUser[0].id;
+      console.log(data);
+      return this.http.post<any>(`http://localhost:8765/employees/savePost/`,data);
+    }
+    getPost(employee_id){
+      return this.http.get<any>(`http://localhost:8765/employees/getPost/`+employee_id);
+    }
+    pushComment(comment){
+      return this.http.post<any>(`http://localhost:8765/employees/addComment/`,comment);
+    }
+    pushLike(){
+      return this.http.get<any>(`http://localhost:8765/employees/addLike/`);
+    }
+
 }

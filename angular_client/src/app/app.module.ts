@@ -25,6 +25,8 @@ import { SwalPopup } from './popup/swal.popup';
 import { MaterialModule } from './material.module';
 import { ForbiddenValidatorDirective } from './employees/validator/forbidden-name.directive';
 import { DialogAddTimeSheet } from './dashboard/add/add.component';
+import { CompanyComponent } from './company/company.component';
+import { ProfileEmployee } from './employees/profile/profile.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +43,9 @@ import { DialogAddTimeSheet } from './dashboard/add/add.component';
     DialogEditEmployee,
     DashBoardComponent,
     ForbiddenValidatorDirective,
-    DialogAddTimeSheet
+    DialogAddTimeSheet,
+    CompanyComponent,
+    ProfileEmployee
   ],
   imports: [
     BrowserModule,
